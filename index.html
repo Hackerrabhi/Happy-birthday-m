@@ -1,0 +1,185 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday Sayanica</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom, #ffd1dc, #fff0f5);
+      text-align: center;
+      min-height: 100vh;
+      padding: 20px;
+      overflow-x: hidden;
+      position: relative;
+    }
+    h1 {
+      font-size: 2.5em;
+      color: #d63384;
+      margin-top: 30px;
+      animation: fadeIn 2s ease-in-out;
+    }
+    .slideshow-container {
+      position: relative;
+      max-width: 700px;
+      margin: 30px auto;
+    }
+    .slideshow {
+      width: 100%;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+    .slideshow img {
+      width: 100%;
+      height: 500px;
+      display: none;
+      object-fit: cover;
+    }
+    .slideshow img.active {
+      display: block;
+    }
+    .nav-buttons {
+      margin-top: 10px;
+    }
+    .nav-buttons button {
+      padding: 8px 16px;
+      margin: 5px;
+      background-color: #d63384;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .message {
+      max-width: 700px;
+      margin: 30px auto;
+      font-size: 1.1em;
+      color: #444;
+      background: #fffafa;
+      padding: 25px;
+      border-radius: 20px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      display: none;
+      animation: fadeIn 3s ease-in-out;
+    }
+    .balloon {
+      position: absolute;
+      width: 30px;
+      height: 40px;
+      background-color: pink;
+      border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+      opacity: 0.7;
+      animation: float 6s ease-in infinite;
+    }
+    .confetti {
+      position: fixed;
+      width: 8px;
+      height: 12px;
+      background-color: #ff69b4;
+      animation: confettiFall 1s ease-out forwards;
+      z-index: 999;
+    }
+    @keyframes confettiFall {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh) rotate(720deg);
+        opacity: 0;
+      }
+    }
+    @keyframes float {
+      0% { transform: translateY(100vh); opacity: 0; }
+      50% { opacity: 1; }
+      100% { transform: translateY(-10vh); opacity: 0; }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2em;
+      }
+      .slideshow img {
+        height: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Happy Birthday Dear Sayanica!</h1>  <div class="slideshow-container">
+    <div class="slideshow">
+      <img src="Snapchat-963887307.jpg" class="active" alt="Birthday 1" />
+      <img src="Snapchat-1120500675.jpg" alt="Birthday 2" />
+      <img src="Snapchat-488768173.jpg" alt="Birthday 3" />
+    </div>
+    <div class="nav-buttons">
+      <button onclick="prevSlide()">Previous</button>
+      <button onclick="nextSlide()">Next</button>
+      <button onclick="showMessage()">Show Message</button>
+    </div>
+  </div>  <div class="message" id="birthdayMessage">
+    Dear Sayanica,<br><br>
+    On this magical day, we celebrate the wonderful person you are. May your journey ahead be filled with laughter, adventure, and the warm glow of love. Every moment with you is a blessing and today is a reminder of how cherished you are. Your smile lights up the world and your kindness touches every heart. Keep chasing dreams, spreading joy, and being the amazing soul that you are. Wishing you a birthday as fabulous and unforgettable as you!<br><br>
+    Happy Birthday once again!
+  </div>  <audio autoplay loop>
+    <source src="https://cdn.pixabay.com/audio/2023/06/25/audio_bfae9b9067.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>  <script>
+    const slides = document.querySelectorAll(".slideshow img");
+    const messageBox = document.getElementById("birthdayMessage");
+    let index = 0;
+
+    function showSlide(n) {
+      slides.forEach(slide => slide.classList.remove("active"));
+      slides[n].classList.add("active");
+    }
+
+    function nextSlide() {
+      index = (index + 1) % slides.length;
+      showSlide(index);
+    }
+
+    function prevSlide() {
+      index = (index - 1 + slides.length) % slides.length;
+      showSlide(index);
+    }
+
+    function showMessage() {
+      messageBox.style.display = 'block';
+    }
+
+    // Balloons
+    const colors = ['#ff69b4', '#ffa07a', '#f08080', '#dda0dd', '#ffb6c1'];
+    for (let i = 0; i < 25; i++) {
+      const el = document.createElement('div');
+      el.className = 'balloon';
+      el.style.left = Math.random() * 100 + 'vw';
+      el.style.animationDuration = (3 + Math.random() * 3) + 's';
+      el.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+      document.body.appendChild(el);
+    }
+
+    // Party popper on load
+    window.onload = () => {
+      for (let i = 0; i < 80; i++) {
+        const confetti = document.createElement('div');
+        confetti.className = 'confetti';
+        confetti.style.left = `${Math.random() * 100}vw`;
+        confetti.style.top = `${Math.random() * -100}px`;
+        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        confetti.style.animationDuration = (0.8 + Math.random()).toFixed(2) + 's';
+        document.body.appendChild(confetti);
+        setTimeout(() => confetti.remove(), 1500);
+      }
+    };
+  </script></body>
+</html>
