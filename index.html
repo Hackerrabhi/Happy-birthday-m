@@ -1,185 +1,262 @@
-<!DOCTYPE html><html lang="en">
+ <!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Happy Birthday Sayanica</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand&display=swap" rel="stylesheet">
   <style>
-    * {
+    * { box-sizing: border-box; }
+
+    body {
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
-    }
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(to bottom, #ffd1dc, #fff0f5);
-      text-align: center;
-      min-height: 100vh;
-      padding: 20px;
-      overflow-x: hidden;
-      position: relative;
-    }
-    h1 {
-      font-size: 2.5em;
-      color: #d63384;
-      margin-top: 30px;
-      animation: fadeIn 2s ease-in-out;
-    }
-    .slideshow-container {
-      position: relative;
-      max-width: 700px;
-      margin: 30px auto;
-    }
-    .slideshow {
-      width: 100%;
-      border-radius: 20px;
+      background: radial-gradient(circle at top, #ffe0f0, #fdf6ff);
+      font-family: 'Quicksand', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
       overflow: hidden;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      animation: fadeInBody 1.5s ease-in-out;
     }
-    .slideshow img {
+
+    @keyframes fadeInBody {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .stars {
+      position: fixed;
       width: 100%;
-      height: 500px;
+      height: 100%;
+      background: transparent;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .star {
+      width: 2px;
+      height: 2px;
+      background: white;
+      position: absolute;
+      border-radius: 50%;
+      animation: twinkle 2s infinite;
+      opacity: 0.8;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.3; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.5); }
+    }
+
+    .book {
+      width: 90%;
+      max-width: 360px;
+      height: 520px;
+      background: #fff0f5;
+      border-radius: 20px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+      padding: 20px;
+      position: relative;
+      animation: float 4s ease-in-out infinite;
+      border: 4px solid #ff8fc2;
+      box-shadow: 0 0 15px #ffb6c1;
+      z-index: 1;
+    }
+
+    .book:hover {
+      transform: scale(1.02);
+    }
+
+    .page-content {
       display: none;
-      object-fit: cover;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
     }
-    .slideshow img.active {
-      display: block;
+
+    .page-content.active {
+      display: flex;
+      animation: fadeIn 0.6s ease-in;
     }
-    .nav-buttons {
-      margin-top: 10px;
+
+    .page-content h1,
+    .page-content h2 {
+      font-family: 'Pacifico', cursive;
+      color: #d63384;
+      margin-bottom: 15px;
+      text-align: center;
     }
-    .nav-buttons button {
+
+    .page-content h1 {
+      font-size: 1.9em;
+      margin-top: 150px;
+    }
+
+    .page-content p {
+      font-size: 1em;
+      color: #444;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .buttons button {
       padding: 8px 16px;
-      margin: 5px;
       background-color: #d63384;
       color: white;
       border: none;
       border-radius: 5px;
       cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.3s;
     }
-    .message {
-      max-width: 700px;
-      margin: 30px auto;
-      font-size: 1.1em;
-      color: #444;
-      background: #fffafa;
-      padding: 25px;
-      border-radius: 20px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      display: none;
-      animation: fadeIn 3s ease-in-out;
+
+    .buttons button:hover {
+      background-color: #b52b6f;
     }
-    .balloon {
-      position: absolute;
-      width: 30px;
-      height: 40px;
-      background-color: pink;
-      border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
-      opacity: 0.7;
-      animation: float 6s ease-in infinite;
-    }
+
     .confetti {
       position: fixed;
-      width: 8px;
-      height: 12px;
+      width: 10px;
+      height: 10px;
       background-color: #ff69b4;
-      animation: confettiFall 1s ease-out forwards;
+      animation: confettiFall 2s ease-out forwards;
       z-index: 999;
+      border-radius: 50%;
     }
+
     @keyframes confettiFall {
-      0% {
-        transform: translateY(0) rotate(0deg);
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(100vh) rotate(720deg);
-        opacity: 0;
-      }
+      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
     }
+
     @keyframes float {
-      0% { transform: translateY(100vh); opacity: 0; }
-      50% { opacity: 1; }
-      100% { transform: translateY(-10vh); opacity: 0; }
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
     }
+
     @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
     }
-    @media (max-width: 600px) {
-      h1 {
-        font-size: 2em;
-      }
-      .slideshow img {
-        height: auto;
-      }
+
+    audio { display: none; }
+
+    @media (max-width: 480px) {
+      .page-content p { font-size: 0.95em; }
+      .page-content h1, .page-content h2 { font-size: 1.4em; }
     }
   </style>
 </head>
 <body>
-  <h1>Happy Birthday Dear Sayanica!</h1>  <div class="slideshow-container">
-    <div class="slideshow">
-      <img src="Snapchat-963887307.jpg" class="active" alt="Birthday 1" />
-      <img src="Snapchat-1120500675.jpg" alt="Birthday 2" />
-      <img src="Snapchat-488768173.jpg" alt="Birthday 3" />
+  <div class="stars" id="stars"></div>
+
+  <div class="book">
+    <div class="page-content active" id="page1">
+      <h1>Happy Birthday<br>Dear Sayanica!</h1>
+      <div class="buttons">
+        <button onclick="nextPage()">Open</button>
+      </div>
     </div>
-    <div class="nav-buttons">
-      <button onclick="prevSlide()">Previous</button>
-      <button onclick="nextSlide()">Next</button>
-      <button onclick="showMessage()">Show Message</button>
+
+    <div class="page-content" id="page2">
+      <h2>To the Brightest Star</h2>
+      <p>
+        On this beautiful day, the universe gifted us someone truly special — you. Your laughter, your light, and your gentle spirit make the world a more beautiful place to be in.
+      </p>
+      <div class="buttons">
+        <button onclick="prevPage()">Back</button>
+        <button onclick="nextPage()">Next</button>
+      </div>
     </div>
-  </div>  <div class="message" id="birthdayMessage">
-    Dear Sayanica,<br><br>
-    On this magical day, we celebrate the wonderful person you are. May your journey ahead be filled with laughter, adventure, and the warm glow of love. Every moment with you is a blessing and today is a reminder of how cherished you are. Your smile lights up the world and your kindness touches every heart. Keep chasing dreams, spreading joy, and being the amazing soul that you are. Wishing you a birthday as fabulous and unforgettable as you!<br><br>
-    Happy Birthday once again!
-  </div>  <audio autoplay loop>
+
+    <div class="page-content" id="page3">
+      <h2>Celebrate You</h2>
+      <p>
+        May your journey ahead be full of moments that sparkle with joy, surprises that make you smile, and dreams that grow wings. You are a rare gem — radiant, real, and remarkable.
+      </p>
+      <div class="buttons">
+        <button onclick="prevPage()">Back</button>
+        <button onclick="nextPage()">Next</button>
+      </div>
+    </div>
+
+    <div class="page-content" id="page4">
+      <h2>Forever Special</h2>
+      <p>
+        Stay magical, stay kind, and never stop being the lovely soul you are. You are deeply cherished and endlessly loved.
+      </p>
+      <p style="margin-top: 20px; text-align: right;"><strong>From: Abhishek Bhagat</strong></p>
+      <div class="buttons">
+        <button onclick="prevPage()">Back</button>
+      </div>
+    </div>
+  </div>
+
+  <audio autoplay loop>
     <source src="https://cdn.pixabay.com/audio/2023/06/25/audio_bfae9b9067.mp3" type="audio/mpeg">
     Your browser does not support the audio element.
-  </audio>  <script>
-    const slides = document.querySelectorAll(".slideshow img");
-    const messageBox = document.getElementById("birthdayMessage");
-    let index = 0;
+  </audio>
 
-    function showSlide(n) {
-      slides.forEach(slide => slide.classList.remove("active"));
-      slides[n].classList.add("active");
+  <script>
+    let current = 1;
+    const total = 4;
+
+    function showPage(n) {
+      for (let i = 1; i <= total; i++) {
+        document.getElementById(`page${i}`).classList.remove("active");
+      }
+      document.getElementById(`page${n}`).classList.add("active");
     }
 
-    function nextSlide() {
-      index = (index + 1) % slides.length;
-      showSlide(index);
+    function nextPage() {
+      if (current < total) {
+        current++;
+        showPage(current);
+      }
     }
 
-    function prevSlide() {
-      index = (index - 1 + slides.length) % slides.length;
-      showSlide(index);
+    function prevPage() {
+      if (current > 1) {
+        current--;
+        showPage(current);
+      }
     }
 
-    function showMessage() {
-      messageBox.style.display = 'block';
-    }
-
-    // Balloons
+    // Confetti + Stars
     const colors = ['#ff69b4', '#ffa07a', '#f08080', '#dda0dd', '#ffb6c1'];
-    for (let i = 0; i < 25; i++) {
-      const el = document.createElement('div');
-      el.className = 'balloon';
-      el.style.left = Math.random() * 100 + 'vw';
-      el.style.animationDuration = (3 + Math.random() * 3) + 's';
-      el.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-      document.body.appendChild(el);
-    }
-
-    // Party popper on load
     window.onload = () => {
-      for (let i = 0; i < 80; i++) {
+      // Confetti
+      for (let i = 0; i < 100; i++) {
         const confetti = document.createElement('div');
         confetti.className = 'confetti';
         confetti.style.left = `${Math.random() * 100}vw`;
         confetti.style.top = `${Math.random() * -100}px`;
         confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-        confetti.style.animationDuration = (0.8 + Math.random()).toFixed(2) + 's';
+        confetti.style.animationDuration = (1 + Math.random()).toFixed(2) + 's';
         document.body.appendChild(confetti);
-        setTimeout(() => confetti.remove(), 1500);
+        setTimeout(() => confetti.remove(), 2000);
+      }
+
+      // Stars
+      const stars = document.getElementById("stars");
+      for (let i = 0; i < 60; i++) {
+        const star = document.createElement("div");
+        star.classList.add("star");
+        star.style.top = Math.random() * 100 + "vh";
+        star.style.left = Math.random() * 100 + "vw";
+        star.style.animationDuration = (1 + Math.random() * 2) + "s";
+        stars.appendChild(star);
       }
     };
-  </script></body>
+  </script>
+</body>
 </html>
